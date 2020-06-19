@@ -11,3 +11,22 @@ until you only visit the 100th door.
 
 Task
 Answer the question:   what state are the doors in after the last pass?   Which are open, which are closed?
+
+after completed the question as a dumb way I found that all door are closed except door corresponding to n²
+so I've designed a optimized version and launched them by a main method to see the performance of each method
+
+I obtained this return
+dumb :
+Operation launched 1000 times to do performance study
+Operation completed in: 1 (us)
+Operation completed in: 1694 (ns)
+optimize:
+Operation launched 1000 times to do performance study
+Operation completed in: 0 (us)
+Operation completed in: 57 (ns)
+
+note:
+run by VSCode WSL 
+use dotnet run to get only performance displayed
+use dotnet run debug to get doors statut + performance displayed
+doors statut isn't counting in performance
