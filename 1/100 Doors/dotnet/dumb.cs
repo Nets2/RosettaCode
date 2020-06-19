@@ -1,39 +1,44 @@
 ﻿using System;
 using System.Diagnostics;
-
-namespace dotnet
+ 
+namespace doors
 {
     class Dumb
     {
-        public void aff(bool[] doors){
+        private bool[] doors;
+        private long microseconds;
+        private long nanoseconds;
+        public Dumb(){
+            doors= new bool[100];
+            for (int d = 0; d < 100; d++) doors[d] = false;
+        }
+
+        public long getUsec(){
+            return this.microseconds;
+        }
+        public long getNsec(){
+            return this.nanoseconds;
+        }
+        public void aff(){
             for(int i = 1; i<=100; i++){
-                if(doors[i-1]){
+                if(this.doors[i-1]){
                     Console.WriteLine("door {0} is open", i);
                 } else {
                     Console.WriteLine("door {0} is close ", i);
                 }
             }
         }   
-
-        static void Main(string[] args)
-        {
-            Dumb p= new Dumb();
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            bool[] doors = new bool[100];
-            for (int d = 0; d < 100; d++) doors[d] = false;
+        public void run(){
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             for(int i=1 ; i<=100; ++i ){
                 for(int j=i-1; j<100; j+=i){
-                    doors[j]=!doors[j];
+                    this.doors[j]=!this.doors[j];
                 }
             }
-            stopWatch.Stop();
-            TimeSpan ts = stopWatch.Elapsed;
-            long microseconds = stopWatch.ElapsedTicks / (Stopwatch.Frequency / (1000L*1000L));
-            long nanoseconds = stopWatch.ElapsedTicks / (Stopwatch.Frequency / (1000L*1000L*1000L));
-            p.aff(doors);
-            Console.WriteLine("Operation completed in: " + microseconds + " (us)");
-            Console.WriteLine("Operation completed in: " + nanoseconds + " (ns)");
+            sw.Stop();
+            microseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L*1000L));
+            nanoseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L*1000L*1000L));
         }
     }
 }
