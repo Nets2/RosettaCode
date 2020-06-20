@@ -4,18 +4,11 @@ using System.Diagnostics;
 namespace doors
 {
     class Optimize{
-        private bool[] doors;
-
-        private long microseconds;
-        private long nanoseconds;
+        public bool[] Doors{get; private set;}
+        public long Microseconds{get;private set;}
+        public long Nanoseconds{get;private set;}
         public Optimize(){
-            doors= new bool[100];
-        }
-        public long getUsec(){
-            return this.microseconds;
-        }
-        public long getNsec(){
-            return this.nanoseconds;
+            Doors= new bool[100];
         }
         public void run(){
             Stopwatch sw = new Stopwatch();
@@ -23,15 +16,15 @@ namespace doors
             int n=0;
             int d;
             while((d=(++n*n)) <= 100){
-                this.doors[d-1]=true;
+                Doors[d-1]=true;
             }
             sw.Stop();
-            microseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L*1000L));
-            nanoseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L*1000L*1000L));
+            Microseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L*1000L));
+            Nanoseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L*1000L*1000L));
         }
         public void aff(){
             for(int i = 1; i<=100; i++){
-                if(this.doors[i-1]){
+                if(Doors[i-1]){
                     Console.WriteLine("door {0} is open", i);
                 } else {
                     Console.WriteLine("door {0} is close ", i);
@@ -39,6 +32,4 @@ namespace doors
             }
         }
     }
-
-
 }

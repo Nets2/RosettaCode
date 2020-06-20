@@ -4,28 +4,28 @@ using System.Diagnostics;
 namespace doors{
 
     class Perf{
-        private long microseconds{get;set;}
-        private long nanoseconds{get;set;}
-        private int length{get;set;}
+        public long Microseconds{get; private set;}
+        public long Nanoseconds{get; private set;}
+        public int Length{get; private set;}
         public Perf(){
-            microseconds=0;
-            nanoseconds=0;
-            length=0;
+            Microseconds=0;
+            Nanoseconds=0;
+            Length=0;
         }
         public void add(long usec, long nsec){
-            this.microseconds+=usec;
-            this.nanoseconds+=nsec;
-            length++;
+            Microseconds+=usec;
+            Nanoseconds+=nsec;
+            Length++;
         }
         public void dispTime(){
-            Console.WriteLine("Operation launched {0} times to do performance study", length);
-            Console.WriteLine("Operation completed in: " + microseconds/length + " (us)");
-            Console.WriteLine("Operation completed in: " + nanoseconds/length + " (ns)");
+            Console.WriteLine("Operation launched {0} times to do performance study", Length);
+            Console.WriteLine("Operation completed in: " + Microseconds/Length + " (us)");
+            Console.WriteLine("Operation completed in: " + Nanoseconds/Length + " (ns)");
         }
         public void reset(){
-            this.nanoseconds=0;
-            this.microseconds=0;
-            this.length=0;
+            Nanoseconds=0;
+            Microseconds=0;
+            Length=0;
         }
     }
     class main{
@@ -48,12 +48,15 @@ namespace doors{
                 dumb.run();
                 if(flag)
                 dumb.aff();
-                perfDumb.add(dumb.getUsec(),dumb.getNsec());
+                perfDumb.add(dumb.Microseconds,dumb.Nanoseconds);
 
                 optimize.run(); 
                 if(flag)
                 optimize.aff();
-                perfOptimize.add(optimize.getUsec(),optimize.getNsec());
+                perfOptimize.add(optimize.Microseconds,optimize.Nanoseconds);
+                if(flag){
+                    flag=!flag;
+                }
             }
             perfDumb.dispTime();
             perfOptimize.dispTime();
