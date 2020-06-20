@@ -21,3 +21,6 @@ First opening the drawer whose outside number is his prisoner number.
 If the card within has his number then he succeeds otherwise he opens the drawer with the same number as that of the revealed card. (until he opens his maximum).
 
 Show and compare the computed probabilities of success for the two strategies, here, on this page.
+
+after launched the test 10 000 times for each dumb and optimize solution we found that dumb ways has close to 0% to find the solution
+the optimized way has something like 30 - 31% chance of success
